@@ -50,12 +50,6 @@ const Index = () => {
       duration: '7 дней',
       features: ['Все функции чита', 'Автообновления', 'Поддержка 24/7', 'Приоритетная поддержка'],
       popular: true
-    },
-    {
-      name: 'Месяц',
-      price: '1999₽',
-      duration: '30 дней',
-      features: ['Все функции чита', 'Автообновления', 'Поддержка 24/7', 'VIP поддержка', 'Бонусные конфиги']
     }
   ];
 
@@ -157,7 +151,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {pricingPlans.map((plan, index) => (
               <Card 
                 key={index}
