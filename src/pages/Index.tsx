@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
-  const [showFreeKeyDialog, setShowFreeKeyDialog] = useState(false);
 
   const features = [
     {
@@ -77,7 +74,7 @@ const Index = () => {
               </Button>
 
               <Button 
-                onClick={() => setShowFreeKeyDialog(true)}
+                onClick={handleBuyClick}
                 size="lg"
                 variant="outline"
                 className="group px-8 py-7 text-lg font-bold border-2 border-secondary hover:bg-secondary/20 hover:scale-105 transition-all duration-300"
@@ -143,28 +140,6 @@ const Index = () => {
           </div>
         </section>
       </div>
-
-      <Dialog open={showFreeKeyDialog} onOpenChange={setShowFreeKeyDialog}>
-        <DialogContent className="sm:max-w-md bg-card border-primary/30">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Получить ключ бесплатно
-            </DialogTitle>
-            <DialogDescription className="text-base pt-4">
-              Если хочешь получить ключ бесплатно, свяжись с нами в Telegram для получения подробностей о бесплатной версии.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex flex-col gap-4 pt-4">
-            <Button 
-              onClick={handleBuyClick}
-              className="w-full bg-gradient-to-r from-primary to-accent hover:scale-105 transition-all duration-300"
-            >
-              <Icon name="MessageCircle" size={20} className="mr-2" />
-              Написать в Telegram
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
