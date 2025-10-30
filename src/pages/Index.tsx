@@ -37,6 +37,46 @@ const Index = () => {
     }
   ];
 
+  const pricingPlans = [
+    {
+      name: 'День',
+      price: '199₽',
+      duration: '1 день',
+      features: ['Все функции чита', 'Автообновления', 'Поддержка 24/7']
+    },
+    {
+      name: 'Неделя',
+      price: '799₽',
+      duration: '7 дней',
+      features: ['Все функции чита', 'Автообновления', 'Поддержка 24/7', 'Приоритетная поддержка'],
+      popular: true
+    },
+    {
+      name: 'Месяц',
+      price: '1999₽',
+      duration: '30 дней',
+      features: ['Все функции чита', 'Автообновления', 'Поддержка 24/7', 'VIP поддержка', 'Бонусные конфиги']
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: 'DarkSlayer',
+      rating: 5,
+      text: 'Лучший чит! Использую уже месяц, ни одного бана. Aimbot работает идеально!'
+    },
+    {
+      name: 'ProGamer228',
+      rating: 5,
+      text: 'ESP просто огонь, вижу всех через стены. Поддержка отвечает быстро, рекомендую!'
+    },
+    {
+      name: 'xXx_Killer_xXx',
+      rating: 5,
+      text: 'Годный софт за свои деньги. Bypass работает стабильно, античит не палит.'
+    }
+  ];
+
   const handleBuyClick = () => {
     window.open('https://t.me/Ebashygeroinss', '_blank');
   };
@@ -71,18 +111,6 @@ const Index = () => {
                   Купить ключ
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </Button>
-
-              <Button 
-                onClick={handleBuyClick}
-                size="lg"
-                variant="outline"
-                className="group px-8 py-7 text-lg font-bold border-2 border-secondary hover:bg-secondary/20 hover:scale-105 transition-all duration-300"
-              >
-                <span className="flex items-center gap-2">
-                  <Icon name="Gift" size={24} />
-                  Получить ключ бесплатно
-                </span>
               </Button>
             </div>
           </div>
@@ -119,7 +147,105 @@ const Index = () => {
           </div>
         </section>
 
+        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl sm:text-6xl font-black mb-4 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+              Тарифы
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Выбери подходящий план и начни доминировать
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {pricingPlans.map((plan, index) => (
+              <Card 
+                key={index}
+                className={`relative p-8 bg-card/50 backdrop-blur-sm border-border/50 transition-all duration-300 hover:scale-105 animate-fade-in ${
+                  plan.popular ? 'border-primary border-2 shadow-2xl shadow-primary/30' : ''
+                }`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent px-4 py-1 rounded-full text-sm font-bold">
+                    ПОПУЛЯРНЫЙ
+                  </div>
+                )}
+                <div className="space-y-6">
+                  <div className="text-center">
+                    <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                    <div className="text-5xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
+                      {plan.price}
+                    </div>
+                    <p className="text-muted-foreground">{plan.duration}</p>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {plan.features.map((feature, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <Icon name="Check" size={20} className="text-primary flex-shrink-0" />
+                        <span className="text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Button 
+                    onClick={handleBuyClick}
+                    className={`w-full py-6 text-lg font-bold transition-all duration-300 ${
+                      plan.popular 
+                        ? 'bg-gradient-to-r from-primary to-accent neon-border' 
+                        : 'bg-muted hover:bg-muted/80'
+                    }`}
+                  >
+                    Купить
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </section>
+
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-primary/5 to-transparent">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl sm:text-6xl font-black mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Отзывы игроков
+              </h2>
+              <p className="text-xl text-muted-foreground">
+                Что говорят наши пользователи
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {testimonials.map((review, index) => (
+                <Card 
+                  key={index}
+                  className="p-6 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-1">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Icon key={i} name="Star" size={20} className="text-accent fill-accent" />
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">
+                      "{review.text}"
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                        <Icon name="User" size={20} className="text-white" />
+                      </div>
+                      <span className="font-bold">{review.name}</span>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-8 animate-slide-up">
             <h2 className="text-5xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Готов начать?
